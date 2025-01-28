@@ -93,9 +93,9 @@ async function saveMessage(name, message) {
 async function loadChatHistory() {
   try {
     const [rows] = await pool.query(
-      "SELECT * FROM messages ORDER BY timestamp ASC LIMIT 50"
+      "SELECT * FROM messages ORDER BY timestamp DESC LIMIT 50"
     );
-    return rows;
+    return rows.reverse(); // Reverse to show oldest to newest
   } catch (err) {
     console.error("Error loading chat history:", err);
     return [];
